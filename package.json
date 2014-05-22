@@ -20,21 +20,23 @@
     "postupdate": "bower update"
   },
   "dependencies": {
-    "koa": "~0",
-    "koa-route": "~1",
-    "koa-logger": "~1",
-    "koa-send": "~1",
-    "koa-jwt": "~0",
-    "koa-livereload": "~0",
+    "bower": "~1",
     "co": "~3",
     "co-body": "~0",
     "co-mongo": "~0",
     "co-request": "~0",
-    "lodash": "~2",
-    "ws": "~0",
     "forever": "~0",
-    "bower": "~1",
-    "grunt-cli": "~0"
+    "glob": "^4.0.0",
+    "grunt-cli": "~0",
+    "koa": "~0",
+    "koa-jwt": "~0",
+    "koa-livereload": "~0",
+    "koa-logger": "~1",
+    "koa-route": "~1",
+    "koa-send": "~1",
+    "lodash": "~2",
+    "thunkify": "^2.1.1",
+    "ws": "~0"
   },
   "devDependencies": {
     "grunt-env": "~0",

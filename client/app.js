@@ -9,7 +9,8 @@ angular
       'ngRoute',
       'koan.common',
       'koan.home',
-      'koan.profile'
+      'koan.profile',
+      'koan.globground'
     ])
 
     .config(function ($routeProvider, $locationProvider) {

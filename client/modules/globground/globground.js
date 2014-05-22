@@ -5,16 +5,16 @@
  */
 
 angular
-    .module('koan.home', [
+    .module('koan.globground', [
       'ngRoute',
       'monospaced.elastic',
       'koan.common'
     ])
     .config(function ($routeProvider) {
       $routeProvider
-          .when('/home', {
+          .when('/', {
             title: 'KOAN Home',
-            templateUrl: 'modules/home/home.html',
-            controller: 'HomeCtrl'
+            templateUrl: 'modules/globground/globground.html',
+            controller: 'GlobgroundCtrl'
           });
     });
