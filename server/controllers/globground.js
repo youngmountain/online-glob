@@ -51,7 +51,8 @@ function * executeGlob() {
 
   var post = yield parse(this);
   var result = yield glob(post.pattern, {
-    cwd: './sandbox'
+    cwd: './sandbox',
+    dot: post.options.hidden
   });
 
   this.status = 200;
