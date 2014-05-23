@@ -8,7 +8,8 @@ angular
     .module('koan.globground', [
       'ngRoute',
       'monospaced.elastic',
-      'koan.common'
+      'koan.common',
+      'treeControl'
     ])
     .config(function ($routeProvider) {
       $routeProvider

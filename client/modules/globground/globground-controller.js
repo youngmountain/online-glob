@@ -8,7 +8,26 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function ($scope,
 
   var user = $scope.common.user;
 
-  $scope.globPattern = '*.js';
+  $scope.globPattern = '**/*.js';
+
+  $scope.treeOptions = {
+      nodeChildren: "children",
+      dirSelectable: true,
+      injectClasses: {
+          ul: "a1",
+          li: "a2",
+          liSelected: "a7",
+          iExpanded: "a3",
+          iCollapsed: "a4",
+          iLeaf: "a5",
+          label: "a6",
+          labelSelected: "a8"
+      }
+  }
+
+  api.globground.tree().success(function (posts) {
+    $scope.dataForTheTree = posts;
+  });
 
 
   // add post/comment creation functions to scope
@@ -30,5 +49,5 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function ($scope,
           // don't clear the post box but enable it so the user can re-try
         });
   };
-  
+
 });

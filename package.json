@@ -34,7 +34,7 @@
     "koa-logger": "~1",
     "koa-route": "~1",
     "koa-send": "~1",
-    "lodash": "~2",
+    "lodash": "^2.4.1",
     "thunkify": "^2.1.1",
     "ws": "~0"
   },

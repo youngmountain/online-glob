@@ -78,6 +78,9 @@ angular.module('koan.common').factory('api', function ($rootScope, $http, $windo
     create: function (pattern) {
       return $http({method: 'POST', url: apiBase + '/globground', data: pattern, headers: headers});
     },
+    tree: function () {
+      return $http({method: 'GET', url: apiBase + '/globground/tree', headers: headers});
+    },
   };
 
   // websocket data event (which transmits json-rpc payloads)

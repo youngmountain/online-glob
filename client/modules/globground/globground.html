@@ -2,11 +2,22 @@
 
 
 <div class="message-box">
+
+  <treecontrol class="tree-classic"
+     tree-model="dataForTheTree"
+     options="treeOptions"
+     on-selection="showSelected(node)"
+     selected-node="node1">
+     {{node.name}}
+  </treecontrol>
+
   <form ng-submit="createPost($event)">
     <input msd-elastic ng-model="globPattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
     <input type="submit" class="btn btn-default" value="Glob it">
   </form>
 
   <pre ng-show="globResult">{{ globResult }}</pre>
+
+
 
 </div>
