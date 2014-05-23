@@ -6,9 +6,12 @@
 
 angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, api) {
 
-  var user = $scope.common.user;
+  // var user = $scope.common.user;
 
   $scope.globPattern = '**/*.js';
+  $scope.options = {
+    hidden: true
+  };
 
   $scope.treeOptions = {
     nodeChildren: 'children',
@@ -32,7 +35,7 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
 
 
   // add post/comment creation functions to scope
-  $scope.createPost = function($event) {
+  $scope.submitGlob = function($event) {
     // don't let the user type in blank lines or submit empty/whitespace only post, or type in something when post is being created
     if (!$scope.globPattern.length) {
       $event.preventDefault();
@@ -40,7 +43,8 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
     }
 
     api.globground.create({
-      pattern: $scope.globPattern
+      pattern: $scope.globPattern,
+      options: $scope.options
     })
       .success(function(result) {
 
