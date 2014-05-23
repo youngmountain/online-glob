@@ -3,6 +3,7 @@
 /**
  * Posts controller for serving user posts.
  */
+var fs = require('fs');
 
 var route = require('koa-route'),
   parse = require('co-body'),
@@ -43,7 +44,7 @@ function * sandboxTree() {
     }]
   }, ];
 
-  this.body = files;
+  this.body = getFiles(process.cwd() + '/sandbox');
 }
 
 function * executeGlob() {
@@ -57,30 +58,26 @@ function * executeGlob() {
   this.body = result;
 }
 
-var fs = require('fs');
-var walk = function(dir, done) {
-  var results = [];
-  fs.readdir(dir, function(err, list) {
-    if (err) return done(err);
-    var i = 0;
-    (function next() {
-      var file = list[i++];
-      if (!file) return done(null, results);
-      file = dir + '/' + file;
-      fs.stat(file, function(err, stat) {
-        if (stat && stat.isDirectory()) {
-          walk(file, function(err, res) {
-            results = results.concat(res);
-            next();
-          });
-        } else {
-          results.push({
-            name: file,
-            children: []
-          });
-          next();
-        }
-      });
-    })();
-  });
-};
+
+function getFiles(dir, files_, folders_) {
+  var parentPath = process.cwd() + '/';
+  if (typeof files_ === 'undefined') files_ = [];
+  if (typeof folders_ === 'undefined') folders_ = [];
+  var files = fs.readdirSync(dir);
+  for (var i in files) {
+    if (!files.hasOwnProperty(i)) continue;
+    var name = dir + '/' + files[i];
+    if (fs.statSync(name).isDirectory()) {
+      // remove parentPath from name
+      folders_.push(name.split(parentPath)[1]);
+      getFiles(name, files_, folders_);
+    } else {
+      // remove parentPath from name
+      files_.push(name.split(parentPath)[1]);
+    }
+  }
+  return {
+    files: files_,
+    folders: folders_
+  };
+}
