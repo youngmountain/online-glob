@@ -60,25 +60,32 @@ function * executeGlob() {
 }
 
 
-function getFiles(dir, files_, folders_) {
-  var parentPath = process.cwd() + '/';
-  if (typeof files_ === 'undefined') files_ = [];
-  if (typeof folders_ === 'undefined') folders_ = [];
+function getFiles(dir) {
+  var parentPath = process.cwd() + '/sandbox/';
+
+  var currentFolder = {
+    name: dir,
+    type: 'folder',
+    content: []
+  };
+
   var files = fs.readdirSync(dir);
+
   for (var i in files) {
     if (!files.hasOwnProperty(i)) continue;
     var name = dir + '/' + files[i];
     if (fs.statSync(name).isDirectory()) {
-      // remove parentPath from name
-      folders_.push(name.split(parentPath)[1]);
-      getFiles(name, files_, folders_);
+      currentFolder.content.push({
+        name: name.split(parentPath)[1],
+        type: 'folder',
+        content: getFiles(name).content
+      });
     } else {
-      // remove parentPath from name
-      files_.push(name.split(parentPath)[1]);
+      currentFolder.content.push({
+        name: name.split(parentPath)[1],
+        type: 'file',
+      });
     }
   }
-  return {
-    files: files_,
-    folders: folders_
-  };
+  return currentFolder;
 }
