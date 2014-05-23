@@ -14,7 +14,7 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
   };
 
   $scope.treeOptions = {
-    nodeChildren: 'children',
+    nodeChildren: 'content',
     dirSelectable: true,
     injectClasses: {
       ul: 'a1',
@@ -25,6 +25,9 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
       iLeaf: 'a5',
       label: 'a6',
       labelSelected: 'a8'
+    },
+    isLeaf: function(node) {
+      return !node.content;
     }
   };
 

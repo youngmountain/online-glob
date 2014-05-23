@@ -3,14 +3,14 @@
 
 <div class="message-box">
 
- <!--  <treecontrol class="tree-classic"
+  <treecontrol class="tree-classic"
      tree-model="dataForTheTree"
      options="treeOptions"
      on-selection="showSelected(node)"
      selected-node="node1">
      {{node.name}}
-  </treecontrol> -->
-  <pre>{{dataForTheTree | json}}</pre>
+  </treecontrol>
+  <!-- <pre>{{dataForTheTree | json}}</pre> -->
   <form ng-submit="submitGlob($event)">
     <h3>Glob</h3>
     <input msd-elastic ng-model="globPattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
