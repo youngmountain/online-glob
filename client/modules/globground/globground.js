@@ -13,7 +13,6 @@ angular
     .config(function ($routeProvider) {
       $routeProvider
           .when('/', {
-            title: 'KOAN Home',
             templateUrl: 'modules/globground/globground.html',
             controller: 'GlobgroundCtrl'
           });
