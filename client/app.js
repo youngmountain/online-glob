@@ -24,31 +24,8 @@ angular
     .run(function ($location, $rootScope, $window, $route, api) {
       // attach commonly used info to root scope to be available to all controllers/views
       var common = $rootScope.common = $rootScope.common || {
-        active: {},
-        user: JSON.parse($window.sessionStorage.user || $window.localStorage.user),
-        logout: function () {
-          delete $window.sessionStorage.token;
-          delete $window.sessionStorage.user;
-          delete $window.localStorage.token;
-          delete $window.localStorage.user;
-          $window.location.replace('/signin.html');
-        },
-        clearDatabase: function () {
-          var self = this;
-          api.debug.clearDatabase().success(function () {
-            self.logout();
-          });
-        }
+        active: {}
       };
-
-      // declare websocket event listeners for backend api
-      api.connected.subscribe(function () {
-        common.onlineIndicatorStyle = {'background-color': 'green'};
-      });
-
-      api.disconnected.subscribe(function () {
-        common.onlineIndicatorStyle = {'background-color': 'lightgrey'};
-      });
 
       // set actions to be taken each time the user navigates
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
