@@ -8,7 +8,6 @@
     "bootstrap-social": "~4",
     "angular": "~1",
     "angular-route": "~1",
-    "angular-elastic": "~2",
     "lodash": "~2",
     "angular-tree-control": "~0.1.5"
   },
