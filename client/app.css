@@ -4,3 +4,11 @@
 body {
   padding-top: 70px;
 }
+
+.ignore {
+  color: red !important;
+}
+
+.selected {
+  color: green !important;
+}

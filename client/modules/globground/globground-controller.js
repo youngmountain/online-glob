@@ -13,29 +13,9 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
     hidden: true
   };
 
-  $scope.treeOptions = {
-    nodeChildren: 'content',
-    dirSelectable: true,
-    injectClasses: {
-      ul: 'a1',
-      li: 'a2',
-      liSelected: 'a7',
-      iExpanded: 'a3',
-      iCollapsed: 'a4',
-      iLeaf: 'a5',
-      label: 'a6',
-      labelSelected: 'a8'
-    },
-    isLeaf: function(node) {
-      return !node.content;
-    }
-  };
-
   api.globground.tree().success(function(posts) {
-    console.log(_.pluck(posts, 'name'));
-    $scope.dataForTheTree = posts;
+    $scope.dataForTheTree = posts.content;
   });
-
 
   // add post/comment creation functions to scope
   $scope.submitGlob = function($event) {
@@ -54,10 +34,31 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
         // Print out the globbing result
         $scope.globResult = result;
 
+        // Highlight matches
+        setSelectedClass($scope.dataForTheTree);
       })
       .error(function() {
         // don't clear the post box but enable it so the user can re-try
       });
   };
 
+  function setSelectedClass(data) {
+
+    data.forEach(function(item) {
+
+      var matchItem = _.findWhere($scope.globResult, function(globItem) {
+        return globItem == item.name;
+      });
+
+      if(matchItem) {
+        item.isSelected = 'selected';
+      } else {
+        item.isSelected = 'ignore';
+      }
+
+      if(item.content) {
+        setSelectedClass(item.content);
+      }
+    });
+  }
 });
