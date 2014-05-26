@@ -7,7 +7,6 @@
 angular
     .module('koan.globground', [
       'ngRoute',
-      'monospaced.elastic',
       'koan.common',
       'treeControl'
     ])

@@ -7,7 +7,6 @@
 angular
     .module('koan.home', [
       'ngRoute',
-      'monospaced.elastic',
       'koan.common'
     ])
     .config(function ($routeProvider) {
