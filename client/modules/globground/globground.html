@@ -9,7 +9,7 @@
   <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">File Tree</h3>
+        <h3 class="panel-title">Files</h3>
       </div>
       <div class="panel-body">
         <ul class="file-tree">
@@ -22,7 +22,7 @@
   <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">File Tree</h3>
+        <h3 class="panel-title">Setup</h3>
       </div>
       <div class="panel-body">
         <form ng-submit="submitGlob($event)">
@@ -36,11 +36,14 @@
         </form>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-12" ng-show="globResult.length">
-    <pre>{{ globResult | json }}</pre>
+    <div class="panel panel-default" ng-show="globResult.length">
+      <div class="panel-heading">
+        <h3 class="panel-title">Result</h3>
+      </div>
+      <div class="panel-body">
+        <pre>{{ globResult | json }}</pre>
+      </div>
+    </div>
   </div>
 </div>
