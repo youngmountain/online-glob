@@ -17,33 +17,6 @@ exports.init = function(app) {
 };
 
 function * sandboxTree() {
-
-  var files = [{
-    'name': 'img',
-    'children': [{
-      'name': 'logo.png',
-      'children': []
-    }, {
-      'name': 'user.gif',
-      'children': []
-    }]
-  }, {
-    'name': 'index.js',
-    'children': []
-  }, {
-    'name': 'package.json',
-    'children': []
-  }, {
-    'name': 'src',
-    'children': [{
-      'name': 'user.js',
-      'children': []
-    }, {
-      'name': 'utils.js',
-      'children': []
-    }]
-  }, ];
-
   this.body = getFiles(process.cwd() + '/sandbox');
 }
 
@@ -61,11 +34,12 @@ function * executeGlob() {
 
 
 function getFiles(dir) {
-  var parentPath = process.cwd() + '/sandbox/';
+  var rootPath = process.cwd() + '/sandbox/';
 
   var currentFolder = {
     name: dir,
     type: 'folder',
+    path: dir,
     content: []
   };
 
@@ -76,13 +50,15 @@ function getFiles(dir) {
     var name = dir + '/' + files[i];
     if (fs.statSync(name).isDirectory()) {
       currentFolder.content.push({
-        name: name.split(parentPath)[1],
+        name: files[i],
         type: 'folder',
+        path: name.split(rootPath)[1],
         content: getFiles(name).content
       });
     } else {
       currentFolder.content.push({
-        name: name.split(parentPath)[1],
+        name: files[i],
+        path: name.split(rootPath)[1],
         type: 'file',
       });
     }

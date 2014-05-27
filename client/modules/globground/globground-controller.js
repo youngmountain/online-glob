@@ -47,7 +47,7 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
     data.forEach(function(item) {
 
       var matchItem = _.findWhere($scope.globResult, function(globItem) {
-        return globItem == item.name;
+        return globItem == item.path;
       });
 
       if(matchItem) {
