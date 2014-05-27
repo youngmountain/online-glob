@@ -1,7 +1,7 @@
 <script type="text/ng-template"  id="tree_item.html">
     <i class="fa" ng-class="{true:'fa-folder-open-o', false:'fa-file-o'}[data.type=='folder']"></i> {{data.name}}
     <ul>
-        <li ng-repeat="data in data.content" class="ng-class:data.isSelected" ng-include="'tree_item.html'"></li>
+        <li ng-repeat="data in data.content" ng-class="data.isSelected" ng-include="'tree_item.html'"></li>
     </ul>
 </script>
 
@@ -13,7 +13,7 @@
       </div>
       <div class="panel-body">
         <ul class="file-tree">
-           <li ng-repeat="data in dataForTheTree" class="ng-class:data.isSelected" ng-include="'tree_item.html'"></li>
+           <li ng-repeat="data in dataForTheTree" ng-class="data.isSelected" ng-include="'tree_item.html'"></li>
         </ul>
       </div>
     </div>
