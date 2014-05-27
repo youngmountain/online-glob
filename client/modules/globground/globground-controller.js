@@ -4,11 +4,11 @@
  * Home controller simply lists all the posts from everyone on the front page.
  */
 
-angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, api) {
+angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, api, $location) {
 
   // var user = $scope.common.user;
 
-  $scope.globPattern = '**/*.js';
+  $scope.globPattern = $location.search().glob || '**/*.js';
   $scope.options = {
     hidden: true
   };
@@ -24,6 +24,9 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
       $event.preventDefault();
       return;
     }
+
+    // $location.search('/' + encodeURIComponent($scope.globPattern));
+    $location.search('glob', $scope.globPattern);
 
     api.globground.create({
       pattern: $scope.globPattern,
