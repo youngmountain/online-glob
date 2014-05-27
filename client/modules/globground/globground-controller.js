@@ -13,9 +13,61 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
     hidden: $location.search().hidden || true
   };
 
-  api.globground.tree().success(function(posts) {
-    $scope.dataForTheTree = posts.content;
-  });
+  $scope.dataForTheTree = [{
+      "name": ".DS_Store",
+      "path": ".DS_Store",
+      "type": "file"
+  }, {
+      "name": ".hiddenfile",
+      "path": ".hiddenfile",
+      "type": "file"
+  }, {
+      "name": "img",
+      "type": "folder",
+      "path": "img",
+      "content": [{
+          "name": ".DS_Store",
+          "path": "img/.DS_Store",
+          "type": "file"
+      }, {
+          "name": "logo.png",
+          "path": "img/logo.png",
+          "type": "file"
+      }, {
+          "name": "user.gif",
+          "path": "img/user.gif",
+          "type": "file"
+      }]
+  }, {
+      "name": "index.js",
+      "path": "index.js",
+      "type": "file"
+  }, {
+      "name": "cli.js",
+      "path": "cli.js",
+      "type": "file"
+  }, {
+      "name": "package.json",
+      "path": "package.json",
+      "type": "file"
+  }, {
+      "name": "src",
+      "type": "folder",
+      "path": "src",
+      "content": [{
+          "name": ".DS_Store",
+          "path": "src/.DS_Store",
+          "type": "file"
+      }, {
+          "name": "user.js",
+          "path": "src/user.js",
+          "type": "file"
+      }, {
+          "name": "utils.js",
+          "path": "src/utils.js",
+          "type": "file"
+      }]
+  }];
 
   // add post/comment creation functions to scope
   $scope.submitGlob = function($event) {
@@ -28,21 +80,19 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
     $location.search('glob', $scope.globPattern);
     $location.search('hidden', $scope.options.hidden);
 
-    api.globground.create({
-      pattern: $scope.globPattern,
-      options: $scope.options
-    })
-      .success(function(result) {
-
-        // Print out the globbing result
-        $scope.globResult = result;
-
-        // Highlight matches
-        setSelectedClass($scope.dataForTheTree);
-      })
-      .error(function() {
-        // don't clear the post box but enable it so the user can re-try
+    var flattenFileTree = function(data) {
+      var result = [];
+      data.forEach(function(item) {
+        result.push(item.path);
+        if(item.content) {
+          result = result.concat(flattenFileTree(item.content));
+        }
       });
+      return result;
+    }
+    var files = flattenFileTree($scope.dataForTheTree);
+    $scope.globResult =  minimatch.match(files, $scope.globPattern, $scope.options);
+    setSelectedClass($scope.dataForTheTree);
   };
 
   function setSelectedClass(data) {
