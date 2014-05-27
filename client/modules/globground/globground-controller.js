@@ -10,7 +10,7 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
 
   $scope.globPattern = $location.search().glob || '**/*.js';
   $scope.options = {
-    hidden: true
+    hidden: $location.search().hidden || true
   };
 
   api.globground.tree().success(function(posts) {
@@ -25,8 +25,8 @@ angular.module('koan.globground').controller('GlobgroundCtrl', function($scope, 
       return;
     }
 
-    // $location.search('/' + encodeURIComponent($scope.globPattern));
     $location.search('glob', $scope.globPattern);
+    $location.search('hidden', $scope.options.hidden);
 
     api.globground.create({
       pattern: $scope.globPattern,
