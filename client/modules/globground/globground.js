@@ -11,8 +11,9 @@ angular
     ])
     .config(function ($routeProvider) {
       $routeProvider
-          .when('/', {
+          .when('/:glob?', {
             templateUrl: 'modules/globground/globground.html',
-            controller: 'GlobgroundCtrl'
+            controller: 'GlobgroundCtrl',
+            reloadOnSearch: false
           });
     });
