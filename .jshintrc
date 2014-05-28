@@ -61,6 +61,7 @@
   "white": true,
   "globals": {
     "angular": true,
+    "minimatch": true,
     "_": true
   }
 }
