@@ -23,7 +23,6 @@
     "bower": "~1",
     "co": "~3",
     "co-body": "~0",
-    "co-mongo": "~0",
     "co-request": "~0",
     "forever": "~0",
     "glob": "^4.0.0",

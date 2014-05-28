@@ -5,8 +5,6 @@
  */
 
 var config = require('./server/config/config'),
-    mongo = require('./server/config/mongo'),
-    mongoSeed = require('./server/config/mongo-seed'),
     koaConfig = require('./server/config/koa'),
     ws = require('./server/config/ws'),
     co = require('co'),
@@ -17,8 +15,6 @@ module.exports = app;
 
 app.init = co(function *() {
   // initialize mongodb and populate the database with seed data if empty
-  yield mongo.connect();
-  yield mongoSeed();
 
   // koa config
   koaConfig(app);
