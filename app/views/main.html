@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Files</h3>
+      </div>
+      <div class="panel-body">
+        <abn-tree tree-data="tree_data"
+          expand-level="3"
+          initial-selection="">
+        </abn-tree>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Setup</h3>
+      </div>
+      <div class="panel-body">
+        <form ng-submit="submitGlob($event)">
+          <h3>Glob</h3>
+          <input ng-model="globPattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
+          <hr>
+          <h3>Options</h3>
+          <input type="checkbox" ng-model="options.dot" value="dot"> hidden <br>
+          <hr>
+          <input type="submit" class="btn btn-primary" value="Glob it">
+        </form>
+      </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="globResult.length">
+      <div class="panel-heading">
+        <h3 class="panel-title">Result</h3>
+      </div>
+      <div class="panel-body">
+        <pre>{{ globResult | json }}</pre>
+      </div>
+    </div>
+  </div>

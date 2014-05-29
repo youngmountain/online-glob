@@ -1,5 +1,6 @@
 {
   "node": true,
+  "browser": true,
   "esnext": true,
   "bitwise": true,
   "camelcase": true,
@@ -17,12 +18,19 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
-  "white": true,
-  "maxparams": 4,
-  "maxdepth": 3,
-  "maxstatements": 5,
-  "maxcomplexity": 10,
   "globals": {
-    "angular": true
+    "after": false,
+    "afterEach": false,
+    "angular": false,
+    "before": false,
+    "beforeEach": false,
+    "browser": false,
+    "describe": false,
+    "expect": false,
+    "inject": false,
+    "it": false,
+    "jasmine": false,
+    "spyOn": false
   }
 }
+

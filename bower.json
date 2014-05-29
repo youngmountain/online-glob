@@ -1,14 +1,17 @@
 {
-  "name": "online-glob",
+  "name": "glob",
   "version": "0.0.0",
   "dependencies": {
-    "angular-ui-router": "0.2.10",
-    "angular": "v1.3.0-build.2774+sha.7a9d245"
+    "angular": "1.2.15",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~1.11.0",
+    "bootstrap": "~3.0.3",
+    "angular-bootstrap-nav-tree": "*",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
-    "angular-mocks": "v1.3.0-build.2774+sha.7a9d245",
-    "angular-scenario": "v1.3.0-build.2774+sha.7a9d245"
-  },
-  "appPath": "public",
-  "testPath": "test/client/specs"
+    "angular-mocks": "1.2.15",
+    "angular-scenario": "1.2.15"
+  }
 }
