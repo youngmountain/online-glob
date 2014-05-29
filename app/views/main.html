@@ -5,12 +5,28 @@
         <h3 class="panel-title">Files</h3>
       </div>
       <div class="panel-body">
+        <span ng-if="loadingTree">loading...</span>
         <abn-tree tree-data="tree_data"
           expand-level="3"
           initial-selection="">
         </abn-tree>
       </div>
     </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Import</h3>
+    </div>
+    <div class="panel-body">
+    <form ng-submit="githubImport($event)">
+      <div class="form-group">
+        <label for="repo">Import from GitHub</label>
+        <input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo" />
+      </div>
+      <input type="submit" class="btn btn-sm btn-primary" value="Import">
+    </form>
+    </div>
+  </div>
   </div>
 
   <div class="col-md-7">

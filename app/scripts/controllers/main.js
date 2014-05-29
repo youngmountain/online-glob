@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('globApp', ['angularBootstrapNavTree'])
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http) {
 
     var data = [
       'README.md',
@@ -32,6 +32,22 @@ angular.module('globApp', ['angularBootstrapNavTree'])
 
       $scope.globResult = minimatch.match(data, $scope.pattern, $scope.options);
     };
+
+    $scope.repo = 'github.com/yeoman/generator';
+    $scope.githubImport = function($event) {
+
+      var repoName = $scope.repo.split('github.com/')[1];
+      var serviceUrl = 'https://api.github.com/repos/' + repoName + '/git/trees/master?recursive=1';
+      $scope.loadingTree = true;
+      $scope.tree_data = [];
+
+      $http({method: 'GET', url: serviceUrl}).success(function(response) {
+        data = _.pluck(response.tree, 'path');
+        $scope.tree_data = createTree(data);
+        $scope.loadingTree = false;
+      })
+    }
+
   });
 
   function createTree(files) {
