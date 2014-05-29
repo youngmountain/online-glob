@@ -1,0 +1,14 @@
+{
+  "name": "online-glob",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular-ui-router": "0.2.10",
+    "angular": "v1.3.0-build.2774+sha.7a9d245"
+  },
+  "devDependencies": {
+    "angular-mocks": "v1.3.0-build.2774+sha.7a9d245",
+    "angular-scenario": "v1.3.0-build.2774+sha.7a9d245"
+  },
+  "appPath": "public",
+  "testPath": "test/client/specs"
+}

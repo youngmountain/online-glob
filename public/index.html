@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="online-globApp">
+<head>
+  <meta charset="UTF-8">
+  <title>online-glob</title>
+  <script src="images/icons/lib/gulpicon-loader.js"></script>
+  <script>
+    gulpicon(["images/icons/dest/icons.data.svg.css", "public/images/icons/dest/icons.data.png.css", "public/images/icons/dest/icons.fallback.css"]);
+  </script>
+  <noscript><link href="images/icons/dest/icons.fallback.css" rel="stylesheet"></noscript>
+  <!-- build:css styles/main.min.css -->
+  <link rel="stylesheet" href="styles/css/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+  <!-- build:js scripts/lib.min.js -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- bower:js -->
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js scripts/app.min.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild -->
+</body>
+</html>
