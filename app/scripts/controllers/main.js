@@ -5,10 +5,12 @@ angular.module('globApp', ['angularBootstrapNavTree'])
 
     var data = [
       'README.md',
+      '.hiddenfile',
       'index.html',
       'src',
       'src/app.js',
       'src/data.js',
+      'src/.hiddenfile',
       'src/lib',
       'src/lib/angular.js',
       'img',
@@ -16,6 +18,20 @@ angular.module('globApp', ['angularBootstrapNavTree'])
     ];
 
     $scope.tree_data = createTree(data);
+    $scope.pattern = '**/*.js';
+    $scope.options = {
+      dot: true
+    };
+
+    $scope.submitGlob = function($event) {
+      if (!$scope.pattern.length) {
+        $event.preventDefault();
+        return;
+      }
+      console.log($scope.pattern);
+
+      $scope.globResult = minimatch.match(data, $scope.pattern, $scope.options);
+    };
   });
 
   function createTree(files) {
