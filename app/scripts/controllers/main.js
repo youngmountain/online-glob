@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('globApp')
-  .controller('MainCtrl', function($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http) {
 
     var data = [
       'README.md',
@@ -22,7 +22,7 @@ angular.module('globApp')
       var lookupHelper = {};
       var fileList = createFileObject(files);
 
-      fileList.forEach(function(file) {
+      fileList.forEach(function (file) {
         var item = {};
         item.label = file.name;
         item.data = file;
@@ -44,7 +44,7 @@ angular.module('globApp')
 
     function createFileObject(files) {
       var result = [];
-      files.forEach(function(file) {
+      files.forEach(function (file) {
         var item = {};
         var path = file.replace(/[^\/]*$/, '');
         if (path) {
@@ -63,7 +63,7 @@ angular.module('globApp')
       dot: true
     };
 
-    $scope.submitGlob = function($event) {
+    $scope.submitGlob = function ($event) {
       if (!$scope.pattern.length) {
         $event.preventDefault();
         return;
@@ -74,7 +74,7 @@ angular.module('globApp')
     };
 
     $scope.repo = 'github.com/yeoman/generator';
-    $scope.githubImport = function($event) {
+    $scope.githubImport = function () {
 
       var repoName = $scope.repo.split('github.com/')[1];
       var serviceUrl = 'https://api.github.com/repos/' + repoName + '/git/trees/master?recursive=1';
@@ -84,7 +84,7 @@ angular.module('globApp')
       $http({
         method: 'GET',
         url: serviceUrl
-      }).success(function(response) {
+      }).success(function (response) {
         data = _.pluck(response.tree, 'path');
         $scope.treeData = createTree(data);
         $scope.loadingTree = false;
