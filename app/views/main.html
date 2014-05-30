@@ -1,3 +1,4 @@
+<pre>{{pattern}}</pre>
 <div class="row">
   <div class="col-md-5">
     <div class="panel panel-default">
@@ -35,10 +36,10 @@
       <div class="panel-body">
         <form ng-submit="submitGlob($event)">
           <h3>Glob</h3>
-          <input ng-model="pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
+          <input ng-model="glob.pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
           <hr>
           <h3>Options</h3>
-          <input type="checkbox" ng-model="options.dot" value="dot">hidden
+          <input type="checkbox" ng-model="glob.options.dot" value="dot">hidden
           <br>
           <hr>
           <input type="submit" class="btn btn-primary" value="Glob it">

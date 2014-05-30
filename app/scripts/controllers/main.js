@@ -58,19 +58,21 @@ angular.module('globApp')
     }
 
     $scope.treeData = createTree(data);
-    $scope.pattern = '**/*.js';
-    $scope.options = {
-      dot: true
+    $scope.glob = {
+      pattern: '**/*.js',
+      options: {
+        dot: true
+      }
     };
 
     $scope.submitGlob = function ($event) {
-      if (!$scope.pattern.length) {
+      if (!$scope.glob.pattern.length) {
         $event.preventDefault();
         return;
       }
-      console.log($scope.pattern);
+      console.log(JSON.stringify($scope.glob.pattern));
 
-      $scope.globResult = minimatch.match(data, $scope.pattern, $scope.options);
+      $scope.globResult = minimatch.match(data, $scope.glob.pattern, $scope.glob.options);
     };
 
     $scope.repo = 'github.com/yeoman/generator';
