@@ -8,7 +8,8 @@
     "jquery": "~1.11.0",
     "bootstrap": "~3.0.3",
     "angular-bootstrap-nav-tree": "*",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "minimatch": "git@github.com:isaacs/minimatch.git"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",

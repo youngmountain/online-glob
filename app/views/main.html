@@ -6,27 +6,25 @@
       </div>
       <div class="panel-body">
         <span ng-if="loadingTree">loading...</span>
-        <abn-tree tree-data="tree_data"
-          expand-level="3"
-          initial-selection="">
+        <abn-tree tree-data="treeData" expand-level="3" initial-selection="">
         </abn-tree>
       </div>
     </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Import</h3>
-    </div>
-    <div class="panel-body">
-    <form ng-submit="githubImport($event)">
-      <div class="form-group">
-        <label for="repo">Import from GitHub</label>
-        <input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo" />
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Import</h3>
       </div>
-      <input type="submit" class="btn btn-sm btn-primary" value="Import">
-    </form>
+      <div class="panel-body">
+        <form ng-submit="githubImport($event)">
+          <div class="form-group">
+            <label for="repo">Import from GitHub</label>
+            <input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo" />
+          </div>
+          <input type="submit" class="btn btn-sm btn-primary" value="Import">
+        </form>
+      </div>
     </div>
-  </div>
   </div>
 
   <div class="col-md-7">
@@ -40,7 +38,8 @@
           <input ng-model="pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
           <hr>
           <h3>Options</h3>
-          <input type="checkbox" ng-model="options.dot" value="dot"> hidden <br>
+          <input type="checkbox" ng-model="options.dot" value="dot">hidden
+          <br>
           <hr>
           <input type="submit" class="btn btn-primary" value="Glob it">
         </form>

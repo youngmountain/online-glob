@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('globApp', ['angularBootstrapNavTree'])
-  .controller('MainCtrl', function ($scope, $http) {
+angular.module('globApp')
+  .controller('MainCtrl', function($scope, $http) {
 
     var data = [
       'README.md',
@@ -17,7 +17,47 @@ angular.module('globApp', ['angularBootstrapNavTree'])
       'img/logo.png'
     ];
 
-    $scope.tree_data = createTree(data);
+    function createTree(files) {
+      var result = [];
+      var lookupHelper = {};
+      var fileList = createFileObject(files);
+
+      fileList.forEach(function(file) {
+        var item = {};
+        item.label = file.name;
+        item.data = file;
+
+        if (file.parentPath) {
+          var parentItem = lookupHelper[file.parentPath];
+          if (!parentItem.children) {
+            parentItem.children = [];
+          }
+          parentItem.children.push(item);
+        } else {
+          result.push(item);
+        }
+        lookupHelper[file.path] = item;
+      });
+
+      return result;
+    }
+
+    function createFileObject(files) {
+      var result = [];
+      files.forEach(function(file) {
+        var item = {};
+        var path = file.replace(/[^\/]*$/, '');
+        if (path) {
+          item.parentPath = path.slice(0, -1);
+        }
+        item.path = file;
+        item.name = file.replace(/^.*[\\\/]/, '');
+        result.push(item);
+      });
+      return result;
+    }
+
+    $scope.treeData = createTree(data);
     $scope.pattern = '**/*.js';
     $scope.options = {
       dot: true
@@ -39,53 +79,16 @@ angular.module('globApp', ['angularBootstrapNavTree'])
       var repoName = $scope.repo.split('github.com/')[1];
       var serviceUrl = 'https://api.github.com/repos/' + repoName + '/git/trees/master?recursive=1';
       $scope.loadingTree = true;
-      $scope.tree_data = [];
+      $scope.treeData = [];
 
-      $http({method: 'GET', url: serviceUrl}).success(function(response) {
+      $http({
+        method: 'GET',
+        url: serviceUrl
+      }).success(function(response) {
         data = _.pluck(response.tree, 'path');
-        $scope.tree_data = createTree(data);
+        $scope.treeData = createTree(data);
         $scope.loadingTree = false;
-      })
-    }
+      });
+    };
 
   });
-
-  function createTree(files) {
-    var result = [];
-    var lookupHelper = {};
-    var fileList = createFileObject(files);
-
-    fileList.forEach(function(file) {
-        var item = {};
-        item.label = file.name;
-        item.data = file;
-
-        if(file.parentPath) {
-            var parentItem = lookupHelper[file.parentPath];
-            if(!parentItem.children) {
-              parentItem.children = [];
-            }
-            parentItem.children.push(item);
-        } else {
-            result.push(item);
-        }
-        lookupHelper[file.path] = item;
-    });
-
-    return result;
-  }
-
-  function createFileObject(files) {
-    var result = [];
-    files.forEach(function(file) {
-      var item = {};
-      var path = file.replace(/[^\/]*$/, '');
-      if(path) {
-        item.parentPath = path.slice(0,-1);
-      }
-      item.path = file;
-      item.name = file.replace(/^.*[\\\/]/, '');
-      result.push(item);
-    });
-    return result;
-  }

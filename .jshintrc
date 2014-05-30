@@ -1,0 +1,42 @@
+{
+  "node": true,
+  "esnext": true,
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "quotmark": "single",
+  "regexp": true,
+  "undef": true,
+  "unused": true,
+  "strict": true,
+  "trailing": true,
+  "smarttabs": true,
+  "white": true,
+  "maxparams": 8,
+  "maxdepth": 3,
+  "maxstatements": 15,
+  "maxcomplexity": 10,
+  "globals": {
+    /* APP */
+    "angular": true,
+    "minimatch": true,
+    "_": true,
+    "Breakpoints": true,
+    /* JASMINE */
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false,
+    "expect"  : false,
+    /* ANGULAR TEST */
+    "inject"   : false
+  }
+}
