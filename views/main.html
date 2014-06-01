@@ -1,1 +1,25 @@
-<div class="row"><div class="col-md-5"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Files</h3></div><div class="panel-body"><span ng-if="loadingTree">loading...</span><abn-tree tree-data="treeData" expand-level="3" initial-selection=""></abn-tree></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Import</h3></div><div class="panel-body"><form ng-submit="githubImport($event)"><div class="form-group"><label for="repo">Import from GitHub</label><input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo"></div><input type="submit" class="btn btn-sm btn-primary" value="Import"></form></div></div></div><div class="col-md-7"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Setup</h3></div><div class="panel-body"><form ng-submit="submitGlob($event)"><h3>Glob</h3><input ng-model="pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..."><hr><h3>Options</h3><input type="checkbox" ng-model="options.dot" value="dot">hidden<br><hr><input type="submit" class="btn btn-primary" value="Glob it"></form></div></div><div class="panel panel-default" ng-show="globResult.length"><div class="panel-heading"><h3 class="panel-title">Result</h3></div><div class="panel-body"><pre>{{ globResult | json }}</pre></div></div></div></div>
+<style>body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13px;
+  color: #333;
+  background: url(bg.jpg);
+  /*width: 620px;*/
+  margin: 40px auto;
+}
+#drop-target {
+  border: 3px dashed #999;
+  text-align: center;
+  color: #999;
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 10px;
+}
+#drop-target.dragover {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: green;
+}
+#debug {
+  margin-top: 20px;
+}</style><div class="row"><div class="col-md-5"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Files</h3></div><div class="panel-body"><span ng-if="loadingTree">loading...</span><abn-tree tree-data="treeData" expand-level="3" initial-selection=""></abn-tree></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Upload your files</h3></div><div class="panel-body" style="display:table;min-height:200px"><div id="drop-target">Drop your files or folders (Chrome >= 21) here</div><div id="debug">No runtime found, your browser doesn't support HTML5 drag &amp; drop upload.</div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Import</h3></div><div class="panel-body"><form ng-submit="githubImport($event)"><div class="form-group"><label for="repo">Import from GitHub</label><input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo"></div><input type="submit" class="btn btn-sm btn-primary" value="Import"></form></div></div></div><div class="col-md-7"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">Setup</h3></div><div class="panel-body"><form ng-submit="submitGlob($event)"><h3>Glob</h3><input ng-model="glob.pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..."><hr><h3>Options</h3><input type="checkbox" ng-model="glob.options.dot" value="dot">hidden<br><hr><input type="submit" class="btn btn-primary" value="Glob it"></form></div></div><div class="panel panel-default" ng-show="globResult.length"><div class="panel-heading"><h3 class="panel-title">Result</h3></div><div class="panel-body"><pre>{{ globResult | json }}</pre></div></div></div></div>
