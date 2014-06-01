@@ -21,7 +21,7 @@ angular.module('globApp')
 
     uploader.bind('Init', function () {
       if (uploader.features.dragdrop) {
-        $('debug').innerHTML = '';
+        angular.element('#debug').hide();
 
         var target = $('drop-target');
 
@@ -90,12 +90,17 @@ angular.module('globApp')
 
     uploader.bind('FilesAdded', function (up, files) {
       var pathList = _.pluck(files, 'relativePath');
-      var data = that.createFolderList(pathList);
+      data = that.createFolderList(pathList);
       $scope.treeData = createTree(data);
       $scope.loadingTree = false;
       $scope.$apply();
     });
 
+    // yes, i know...
+    // this is a very dirty hack.
+    // i'll change it as soon as i can.
+    // it's for quick demonstration.
+    // i promise... ;-)
     setTimeout(function () {
       uploader.init();
     }, 100);

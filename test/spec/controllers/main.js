@@ -38,9 +38,6 @@ describe('Controller: MainCtrl', function() {
       ];
 
       var result = MainCtrl.createFolderList(sampleInput);
-      console.log('--------------------');
-      console.log(result);
-      console.log('--------------------');
       expect(angular.equals(result, expected)).toBe(true);
 
     });
@@ -70,9 +67,7 @@ describe('Controller: MainCtrl', function() {
       ];
 
       var result = MainCtrl.createFolderList(sampleInput);
-      console.log('--------------------');
       console.log(JSON.stringify(result, null, 2));
-      console.log('--------------------');
       expect(angular.equals(result, expected)).toBe(true);
 
     });
