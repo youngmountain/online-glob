@@ -3,6 +3,8 @@
 angular.module('globApp')
   .controller('MainCtrl', function ($scope, $http) {
 
+    var that = this;
+
     function $(id) {
       /*global document*/
       return document.getElementById(id);
@@ -41,11 +43,60 @@ angular.module('globApp')
       }
     });
 
+    /**
+     * example input:
+     * [
+     * 'test/image.jpg',
+     * 'test/main.js',
+     * 'test/deeper/app.js',
+     * 'test/deeper/bla.js'
+     * ]
+     *
+     * example output:
+     * [
+     * 'test'
+     * 'test/image.jpg',
+     * 'test/main.js',
+     * 'test/deeper'
+     * 'test/deeper/app.js',
+     * 'test/deeper/bla.js'
+     * ]
+     */
+    this.createFolderList = function createFolderList(files) {
+      var result = [];
+      _.each(files, function (file) {
+        // check if parent folder path is already in the result list
+        var folders = file.split('/');
+        if (folders.length > 1) {
+          // remove file from path
+          folders.splice(folders.length - 1, 1);
+          var tmpPath = '';
+          for (var i = 0; i < folders.length; i++) {
+            if (tmpPath) {
+              tmpPath += '/';
+            }
+            tmpPath += folders[i];
+
+            // check if we need to add the new path
+            if (result.indexOf(tmpPath) === -1) {
+              result.push(tmpPath);
+            }
+          }
+        }
+        result.push(file);
+      });
+      return result;
+    };
+
     uploader.bind('FilesAdded', function (up, files) {
-      var result = _.pluck(files, 'relativePath')
+      var pathList = _.pluck(files, 'relativePath');
+      var data = that.createFolderList(pathList);
+      $scope.treeData = createTree(data);
+      $scope.loadingTree = false;
+      $scope.$apply();
     });
 
-    setTimeout(function() {
+    setTimeout(function () {
       uploader.init();
     }, 100);
 
@@ -74,7 +125,7 @@ angular.module('globApp')
         item.data = file;
 
         if (file.parentPath) {
-          var parentItem = lookupHelper[file.parentPath];
+          var parentItem = lookupHelper[file.parentPath] || {};
           if (!parentItem.children) {
             parentItem.children = [];
           }
