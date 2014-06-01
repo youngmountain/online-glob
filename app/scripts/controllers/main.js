@@ -3,6 +3,52 @@
 angular.module('globApp')
   .controller('MainCtrl', function ($scope, $http) {
 
+    function $(id) {
+      /*global document*/
+      return document.getElementById(id);
+    }
+    /*global plupload*/
+    var uploader = new plupload.Uploader({
+      /* jshint camelcase: false */
+      runtimes: 'html5',
+      drop_element: 'drop-target',
+      browse_button: 'drop-target',
+      max_file_size: '10mb',
+      upload: 'upload.php'
+    });
+
+    uploader.bind('Init', function () {
+      if (uploader.features.dragdrop) {
+        $('debug').innerHTML = '';
+
+        var target = $('drop-target');
+
+        target.ondragover = function (event) {
+          event.dataTransfer.dropEffect = 'copy';
+        };
+
+        target.ondragenter = function () {
+          this.className = 'dragover';
+        };
+
+        target.ondragleave = function () {
+          this.className = '';
+        };
+
+        target.ondrop = function () {
+          this.className = '';
+        };
+      }
+    });
+
+    uploader.bind('FilesAdded', function (up, files) {
+      var result = _.pluck(files, 'relativePath')
+    });
+
+    setTimeout(function() {
+      uploader.init();
+    }, 100);
+
     var data = [
       'README.md',
       '.hiddenfile',

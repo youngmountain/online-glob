@@ -1,4 +1,33 @@
-<pre>{{pattern}}</pre>
+<style>
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 13px;
+  color: #333;
+  background: url(bg.jpg);
+  width: 620px;
+  margin: 40px auto;
+}
+#drop-target {
+  border: 10px dashed #999;
+  text-align: center;
+  color: #999;
+  font-size: 20px;
+  width: 600px;
+  height: 300px;
+  line-height: 300px;
+  cursor: pointer;
+}
+#drop-target.dragover {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: green;
+}
+#debug {
+  margin-top: 20px;
+}
+</style>
+<div id="drop-target">Drop your files or folders (Chrome >= 21) here</div>
+<div id="debug">No runtime found, your browser doesn't support HTML5 drag &amp; drop upload.</div>
+
 <div class="row">
   <div class="col-md-5">
     <div class="panel panel-default">
@@ -56,3 +85,4 @@
       </div>
     </div>
   </div>
+</div>

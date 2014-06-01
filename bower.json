@@ -9,7 +9,8 @@
     "bootstrap": "~3.0.3",
     "angular-bootstrap-nav-tree": "*",
     "underscore": "~1.6.0",
-    "minimatch": "git@github.com:isaacs/minimatch.git"
+    "minimatch": "git@github.com:isaacs/minimatch.git",
+    "plupload": "git@github.com:protonet/plupload.git"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",
