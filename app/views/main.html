@@ -54,9 +54,10 @@ body {
       </div>
       <div class="panel-body">
         <form ng-submit="githubImport($event)">
-          <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error': importError }">
             <label for="repo">Import from GitHub</label>
-            <input ng-model="repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo" />
+            <input ng-model="glob.repo" name="repo" class="form-control" id="repo" placeholder="github.com/user/repo" />
+            <p class="help-block">{{ importError }}</p>
           </div>
           <input type="submit" class="btn btn-sm btn-primary" value="Import">
         </form>
@@ -75,8 +76,7 @@ body {
           <input ng-model="glob.pattern" class="form-control" name="pattern" placeholder="Type your glob pattern here..." />
           <hr>
           <h3>Options</h3>
-          <input type="checkbox" ng-model="glob.options.dot" value="dot">hidden
-          <br>
+          <input type="checkbox" ng-model="glob.options.dot" value="dot"> hidden
           <hr>
           <input type="submit" class="btn btn-primary" value="Glob it">
         </form>

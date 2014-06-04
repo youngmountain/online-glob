@@ -177,11 +177,17 @@ angular.module('globApp')
       $scope.globResult = minimatch.match(data, $scope.glob.pattern, $scope.glob.options);
     };
 
-    $scope.repo = 'github.com/yeoman/generator';
     $scope.githubImport = function () {
+      if(!$scope.glob.repo) {
+        $scope.importError = 'Please enter a valid GitHub URL';
+        return;
+      }
 
-      var repoName = $scope.repo.split('github.com/')[1];
+      var regex = /(https?:\/\/|git\@)?github.com[:|\/](\w*\/\w*)(.+)?/g;
+      var repoName = $scope.glob.repo.replace(regex, '$2');
+
       var serviceUrl = 'https://api.github.com/repos/' + repoName + '/git/trees/master?recursive=1';
+      $scope.importError = '';
       $scope.loadingTree = true;
       $scope.treeData = [];
 
@@ -190,6 +196,10 @@ angular.module('globApp')
         url: serviceUrl
       }).success(function (response) {
         data = _.pluck(response.tree, 'path');
+        $scope.treeData = createTree(data);
+        $scope.loadingTree = false;
+      }).error(function() {
+        $scope.importError = 'No reposotiry found at ' + $scope.glob.repo;
         $scope.treeData = createTree(data);
         $scope.loadingTree = false;
       });
